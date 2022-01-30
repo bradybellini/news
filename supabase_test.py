@@ -6,10 +6,10 @@ from supabase import create_client, Client
 from rssparser import RSSParser
 import pprint
 
-r = RSSParser()
+# r = RSSParser()
 
-r.articles('https://kotaku.com/rss')
-def insert_articles(feed: string):
+# r.articles('https://kotaku.com/rss', '559b67c6-90af-4ce9-91f1-74fbedff7d00')
+def insert_articles(feed: string, feed_id):
 
     load_dotenv()
     r = RSSParser()
@@ -20,7 +20,7 @@ def insert_articles(feed: string):
 
     supabase: Client = create_client(url, key)
     # for i in range(len(d.entries)):
-    insert = supabase.table("article_test").insert(r.articles(feed)).execute()
+    insert = supabase.table("articles_duplicate").upsert(r.articles(feed, feed_id) ).execute()
     print(insert[0])
 # d = feedparser.parse('https://kotaku.com/rss')
 
@@ -28,4 +28,4 @@ def insert_articles(feed: string):
 # # print(d.entries[1]['comments'])
 # for i in range(len(d.entries)):
 #     print(d.entries[i].guidislink)
-insert_articles('https://kotaku.com/rss')
+insert_articles('https://kotaku.com/rss', '559b67c6-90af-4ce9-91f1-74fbedff7d00')
