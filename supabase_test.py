@@ -1,28 +1,31 @@
 import os
+import string
 import feedparser
 from dotenv import load_dotenv
 from supabase import create_client, Client
+from rssparser import RSSParser
+import pprint
 
-load_dotenv()
-d = feedparser.parse("https://kotaku.com/rss")
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
+r = RSSParser()
 
-supabase: Client = create_client(url, key)
-# for i in range(len(d.entries)):
-#     supabase.table("article_test").insert(
-#         {
-#             "title": d.entries[i]["title"],
-#             "author": d.entries[i]["author"],
-#             "link": d.entries[i]["link"],
-#             "summary": d.entries[i]["summary"],
-#             "published": d.entries[i]["published"],
-#         }
-#     ).execute()
+r.articles('https://kotaku.com/rss')
+def insert_articles(feed: string):
 
+    load_dotenv()
+    r = RSSParser()
+
+    
+    url: str = os.environ.get("SUPABASE_URL")
+    key: str = os.environ.get("SUPABASE_KEY")
+
+    supabase: Client = create_client(url, key)
+    # for i in range(len(d.entries)):
+    insert = supabase.table("article_test").insert(r.articles(feed)).execute()
+    print(insert[0])
 # d = feedparser.parse('https://kotaku.com/rss')
 
 
-print(d.entries[1]['comments'])
+# # print(d.entries[1]['comments'])
 # for i in range(len(d.entries)):
-#     print(d.entries[i].published)
+#     print(d.entries[i].guidislink)
+insert_articles('https://kotaku.com/rss')
