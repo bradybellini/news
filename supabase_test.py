@@ -20,7 +20,7 @@ def insert_articles(feed: string, feed_id):
 
     supabase: Client = create_client(url, key)
     # for i in range(len(d.entries)):
-    insert = supabase.table("articles_duplicate").upsert(r.articles(feed, feed_id) ).execute()
+    # insert = supabase.table("articles_duplicate").upsert(r.articles(feed, feed_id) ).execute()
     print(insert[0])
 # d = feedparser.parse('https://kotaku.com/rss')
 
