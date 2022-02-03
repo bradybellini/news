@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from supabase import create_client, Client
 from rssparser import RSSParser
 import pprint
-from remove_html import HTMLTextExtractor
 from lxml import html
 from lxml.html.clean import clean_html
 
