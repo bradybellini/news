@@ -1,9 +1,7 @@
-
 from feedparser import parse
 from lxml import html
 from lxml.html.clean import clean_html
 import hashlib
-
 
 
 class RSSParser:
@@ -13,9 +11,9 @@ class RSSParser:
     def _get_article_info(self, feed_id: str, article: dict) -> dict:
         authors = getattr(article, "author", "no authors listed")
         summary = getattr(article, "summary", "none")
-        if summary != 'none':
+        if summary != "none":
             summary = clean_html(html.fromstring(summary)).text_content().strip()
-            
+
         return {
             "feed_id": feed_id,
             "title": article.title,
@@ -26,8 +24,8 @@ class RSSParser:
             "guid": article.link if article.guidislink else article.guid,
             "uid": hashlib.md5(str(article.title + article.link).encode()).hexdigest(),
         }
-    
-    def articles(self, feed, feed_id):
+
+    def articles(self, feed: str, feed_id: str) -> list:
         parsed = parse(feed)
         articles = [parsed for parsed in parsed.entries]
         return [self._get_article_info(feed_id, entry) for entry in articles]
