@@ -1,7 +1,7 @@
 import os
 import string
 from dotenv import load_dotenv
-from supabase import create_client, Client
+from supainsert import create_client, Client
 from rssparser import RSSParser
 
 # r = RSSParser()
