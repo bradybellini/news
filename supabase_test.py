@@ -1,12 +1,8 @@
 import os
 import string
-import feedparser
 from dotenv import load_dotenv
 from supabase import create_client, Client
 from rssparser import RSSParser
-import pprint
-from lxml import html
-from lxml.html.clean import clean_html
 
 # r = RSSParser()
 
@@ -37,4 +33,4 @@ def insert_articles(feed: string, feed_id):
 # # print(d.entries[1]['comments'])
 # for i in range(len(d.entries)):
 #     print(d.entries[i].guidislink)
-insert_articles("https://kotaku.com/rss", "559b67c6-90af-4ce9-91f1-74fbedff7d00")
+# insert_articles("https://kotaku.com/rss", "559b67c6-90af-4ce9-91f1-74fbedff7d00")
