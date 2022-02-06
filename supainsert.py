@@ -17,4 +17,7 @@ class SupaInsert:
 
     def insert(self, feed: str, feed_id: str):
         r = RSSParser(feed, feed_id)
+        
+    def select(self):
+        pass
 
