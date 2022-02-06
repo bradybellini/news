@@ -1,7 +1,7 @@
 import os
 import string
 from dotenv import load_dotenv
-from supainsert import create_client, Client
+from supabase import create_client, Client
 from rssparser import RSSParser
 
 # r = RSSParser()
@@ -16,14 +16,15 @@ def insert_articles(feed: string, feed_id):
     key: str = os.environ.get("SUPABASE_KEY")
 
     supabase: Client = create_client(url, key)
+#     print(r.articles(feed, feed_id)[0])
     # for i in range(len(d.entries)):
-    # insert = supabase.table("articles_duplicate").upsert(r.articles(feed, feed_id) ).execute()
-    # print(insert[0])
-    select = supabase.table("feeds").select('feed_url','id').execute()
+    insert = supabase.table("articles_duplicate").upsert(r.articles(feed, feed_id) ).execute()
+    print(insert)
+    # select = supabase.table("feeds").select('feed_url','id').execute()
     # print(len(select[0]))
-    for i in range(len(select[0])):
-        insert = supabase.table("articles_duplicate").upsert(r.articles(select[0][i]['feed_url'], select[0][i]['id']) ).execute()
-        print(insert)
+    # for i in range(len(select[0])):
+    #     insert = supabase.table("articles_duplicate").upsert(r.articles(select[0][i]['feed_url'], select[0][i]['id']) ).execute()
+    #     print(insert)
     # d = feedparser.parse('https://kotaku.com/rss')
     # tree = html.fromstring(select[0][1]["summary"])
     # print(clean_html(tree).text_content().strip())
@@ -33,4 +34,4 @@ def insert_articles(feed: string, feed_id):
 # # print(d.entries[1]['comments'])
 # for i in range(len(d.entries)):
 #     print(d.entries[i].guidislink)
-# insert_articles("https://kotaku.com/rss", "559b67c6-90af-4ce9-91f1-74fbedff7d00")
+insert_articles("https://www.gameinformer.com/rss.xml", "559b67c6-90af-4ce9-91f1-74fbedff7d00")
