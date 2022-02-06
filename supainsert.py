@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from supainsert import create_client, Client
+from supabase import create_client, Client
 from rssparser import RSSParser
 
 
@@ -16,8 +16,12 @@ class SupaInsert:
         return supabase
 
     def insert(self, feed: str, feed_id: str):
-        r = RSSParser(feed, feed_id)
-        
-    def select(self):
-        pass
-
+        supabase: Client = self._create_client()
+        r = RSSParser()
+        # articles = r.articles(feed, feed_id)
+        # print(articles)
+        # for i in range(len(articles)):
+        #     print(articles[i]['title'])
+        _insert = supabase.table(self.table).upsert(r.articles(feed, feed_id)).execute()
+        return _insert
+# 
