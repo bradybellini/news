@@ -20,8 +20,8 @@ class SupaInsert:
         r = RSSParser()
         # articles = r.articles(feed, feed_id)
         # print(articles)
-        # for i in range(len(articles)):
-        #     print(articles[i]['title'])
+        for i in range(len(articles)):
+            print(articles[i]['title'])
         _insert = supabase.table(self.table).upsert(r.articles(feed, feed_id)).execute()
         return _insert
 # 
