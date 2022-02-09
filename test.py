@@ -1,6 +1,9 @@
-from supainsert import SupaInsert
+from supapsql import SupaPSQL
 
-supai = SupaInsert('articles_duplicate')
+supa = SupaPSQL()
 
-insert = supai.insert("https://www.gameinformer.com/rss.xml", "f70bd78d-71b0-4fae-9d15-9b321eb0fd75")
-print(insert)
+# insert = supai.insert("https://www.gameinformer.com/rss.xml", "b52da7d9-1a18-4ce3-af41-546f6568f127")
+supa.run()
+
+# print(insert)
+
