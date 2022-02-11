@@ -12,7 +12,7 @@ class RSSParser:
     def _get_article_info(self, feed_id: str, article: dict) -> dict:
         summary = getattr(article, "summary", "None")
         # print(article["published_parsed"])
-        date = time.strftime('%Y-%m-%d %H:%M:%S', article["published_parsed"])
+        date = time.strftime("%Y-%m-%d %H:%M:%S", article["published_parsed"])
         print(date)
         if summary != "None":
             summary = clean_html(html.fromstring(summary)).text_content().strip()
