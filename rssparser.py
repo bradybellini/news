@@ -20,7 +20,7 @@ class RSSParser:
             "title": article.title,
             "link": article.link,
             "author": getattr(article, "author", "No Authors Listed"),
-            "published": time.strftime("%Y-%m-%d %H:%M:%S", article["published_parsed"]) if date else date,
+            "published": time.strftime("%Y-%m-%d %H:%M:%S", article["published_parsed"]) if date else None,
             "summary": clean_html(html.fromstring(summary)).text_content().strip() if summary else summary,
             "guid": article.link if guidislink else guid,
             "uid": hashlib.md5(str(article.title + article.link).encode()).hexdigest(),
