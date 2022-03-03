@@ -3,7 +3,7 @@ from rssparser import RSSParser
 
 
 # r = RSSParser()
-# articles = r.articles("https://www.macworld.com/feed", "9228b3b2-970a-4f34-b88b-53c05e163d8b")
+# articles = r.articles("https://kotaku.com/rss", "f70bd78d-71b0-4fae-9d15-9b321eb0fd75")
 
 # articles = r.articles("https://www.huffpost.com/section/front-page/feed", "42d45f8b-491b-432c-88bf-a78d9ae1b87b")
 
