@@ -14,7 +14,14 @@ class RSSParser:
         date = getattr(article, "published", None)
         guidislink = getattr(article, "guidislink", False)
         guid = getattr(article, "guid", None)
-
+        tags = getattr(article, "tags", None)
+        # print(type(tags))
+        tag_list = []
+        if tags:
+            for i in range(len(tags)):
+                tag_list.append(tags[i]['term'])
+        else:
+            tag_list = None
         return {
             "feed_id": feed_id,
             "title": article.title,
@@ -24,6 +31,7 @@ class RSSParser:
             "summary": clean_html(html.fromstring(summary)).text_content().strip() if summary else summary,
             "guid": article.link if guidislink else guid,
             "uid": hashlib.md5(str(article.title + article.link).encode()).hexdigest(),
+            "tags": tag_list
         }
 
     def articles(self, feed: str, feed_id: str) -> list:
