@@ -1,3 +1,4 @@
+from typing import Any
 from feedparser import parse
 from lxml import html
 from lxml.html.clean import clean_html
@@ -34,7 +35,11 @@ class RSSParser:
             "tags": tag_list
         }
 
-    def articles(self, feed: str, feed_id: str) -> list:
+    def articles(self, feed: str, feed_id: str) -> Any:
         parsed = parse(feed)
         articles = [parsed for parsed in parsed.entries]
+        # print(len(articles))
+        # for i in range(len(articles)):
+            # print(articles[i])
+            # return self._get_article_info(feed_id, articles[i])
         return [self._get_article_info(feed_id, entry) for entry in articles]

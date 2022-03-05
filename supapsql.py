@@ -29,9 +29,11 @@ class SupaPSQL:
         articles = r.articles(feed, feed_id)
         for i in range(len(articles)):
             try:
-                supabase.table(self.insert_table).upsert(
+                insert = supabase.table(self.insert_table).insert(
                     articles[i],
                 ).execute()
+                if len(insert.data) > 0:
+                    print(insert)
             except exceptions.APIError as e:
                 print(e)
 
