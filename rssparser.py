@@ -20,7 +20,7 @@ class RSSParser:
         tag_list = []
         if tags:
             for i in range(len(tags)):
-                tag_list.append(tags[i]['term'])
+                tag_list.append(tags[i]['term'].casefold())
         else:
             tag_list = None
         return {
@@ -35,7 +35,7 @@ class RSSParser:
             "tags": tag_list
         }
 
-    def articles(self, feed: str, feed_id: str) -> Any:
+    def parse_feed(self, feed: str, feed_id: str) -> Any:
         parsed = parse(feed)
         articles = [parsed for parsed in parsed.entries]
         # print(len(articles))
