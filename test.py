@@ -1,17 +1,20 @@
-from supapsql import SupaPSQL
-from rssparser import RSSParser
-from filter import ArticleFilter
 import spacy
-from spacy import displacy
-
+import en_core_web_trf
 
 spacy.require_cpu()
-ner = spacy.load("en_core_web_sm", disable=["tagger", "parser", "attribute_ruler", "lemmatizer"] )
-raw_text="How SiriusXM Bought and Bungled a Beloved Podcast Network"
-text1= ner(raw_text)
-for word in text1.ents:
-    print(word.text,word.label_)
+nlp = en_core_web_trf.load(disable=["tagger", "parser", "attribute_ruler", "lemmatizer"])
+nlp.add_pipe('opentapioca')
+# ner = spacy.load("en_core_web_trf", disable=["tagger", "parser", "attribute_ruler", "lemmatizer"] )
+raw_text="Stadia controllers could become e-waste unless Google issues Bluetooth update"
+doc = nlp(raw_text)
+# ents = [(e.text, e.start_char, e.end_char, e.label_) for e in doc.ents]
+ents = [(e.text, e.kb_id_, e.label_, e._.description, e._.score) for e in doc.ents]
 
+
+print(ents)
+
+# for ent in doc.ents:
+#     print(ent.text, ent.start_char, ent.end_char, ent.label_)
 
 # list1 = ["Ad", "sponsor"]
 # list2 = ["cool", "neat", "ad", "great"]
