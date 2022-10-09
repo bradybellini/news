@@ -1,6 +1,7 @@
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from flair.models import TextClassifier
+import json
 
 test_article = {
     "feed_id": "f70bd78d-71b0-4fae-9d15-9b321eb0fd75",
@@ -43,16 +44,20 @@ test_article = {
     ],
     "Sentiment": {"Score": 0.9848532676696777, "Tag": "NEGATIVE"},
 }
-# print(test_article["Entities"])
-classifier = TextClassifier.load("sentiment")
-sentence = Sentence(
-    "U.K. Leader Liz Truss Faces Political Backlash After Sparking Market Turmoil"
-)
-classifier.predict(sentence)
 
-sent = {"Score": sentence.score, "Tag": sentence.tag}
-test_article["Sentiment"] = sent
-print(test_article)
+
+
+print(json.dumps(test_article).encode('utf-8'))
+# print(test_article["Entities"])
+# classifier = TextClassifier.load("sentiment")
+# sentence = Sentence(
+#     "U.K. Leader Liz Truss Faces Political Backlash After Sparking Market Turmoil"
+# )
+# classifier.predict(sentence)
+
+# sent = {"Score": sentence.score, "Tag": sentence.tag}
+# test_article["Sentiment"] = sent
+# print(test_article)
 # print(sentence.score)
 # print(sentence.tag)
 # print(sentence.text)
