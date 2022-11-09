@@ -47,12 +47,12 @@ test_article = {
 
 
 
-print(json.dumps(test_article).encode('utf-8'))
+# print(json.dumps(test_article).encode('utf-8'))
 # print(test_article["Entities"])
 # classifier = TextClassifier.load("sentiment")
-# sentence = Sentence(
-#     "U.K. Leader Liz Truss Faces Political Backlash After Sparking Market Turmoil"
-# )
+sentence = Sentence(
+    "Every U.S. PlayStation 2 Game Manual Is Now Scanned In 4K"
+)
 # classifier.predict(sentence)
 
 # sent = {"Score": sentence.score, "Tag": sentence.tag}
@@ -63,9 +63,21 @@ print(json.dumps(test_article).encode('utf-8'))
 # print(sentence.text)
 
 
-# tagger = SequenceTagger.load("ner-large")
+tagger = SequenceTagger.load("ner-large")
 
-# tagger.predict(sentence)
+# result = tagger.predict(sentence)
+# print(result)
+ents = [
+    {
+        "Word": entity.text,
+        "Classification": entity.tag,
+        "Start Position": entity.start_position,
+        "End Position": entity.end_position,
+    }
+    for entity in sentence.get_spans("ner")
+]
+print(ents)
+    
 # ents = [
 #     {
 #         "Word": entity.text,
@@ -73,7 +85,6 @@ print(json.dumps(test_article).encode('utf-8'))
 #         "Start Position": entity.start_position,
 #         "End Position": entity.end_position,
 #     }
-#     for entity in sentence.get_spans("ner")
 # ]
 # print(ents)
 
